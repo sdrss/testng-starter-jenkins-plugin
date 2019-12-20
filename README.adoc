@@ -4,7 +4,8 @@
 
 == Description
 
-It's a jenkins plugin that start TestNG tests 
+It's a jenkins plugin to start testNG suites with all testNG/reportNG related attributes.
+Uses https://github.com/sdrss/maven-testng-starter-plugin[maven testng starter plugin]
 
 
 == Release Notes
