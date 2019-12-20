@@ -1,0 +1,15 @@
+= TestNG Starter
+:imagesdir: screenshots
+:icons:
+
+== Description
+
+It's a jenkins plugin that start TestNG tests 
+
+
+== Release Notes
+
+See the https://github.com/jenkinsci/test-results-aggregator-plugin/releases[Github releases page].
+
+=== 0.0.1 (12 Dec 2019)
+ * Initial Release

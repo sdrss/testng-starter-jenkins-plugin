@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jenkins-ci.plugins</groupId>
+		<artifactId>plugin</artifactId>
+		<version>2.37</version>
+		<relativePath />
+	</parent>
+	<artifactId>testng-starter</artifactId>
+	<packaging>hpi</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>TestNG Starter Plugin</name>
+	<description>Start TestNG</description>
+	<url>https://github.com/jenkinsci/testng-starter-plugin</url>
+	<properties>
+    	<jenkins.version>2.0</jenkins.version>
+	</properties>
+	<licenses>
+		<license>
+			<name>Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+	<repositories>
+		<repository>
+			<id>repo.jenkins-ci.org</id>
+			<url>https://repo.jenkins-ci.org/public/</url>
+		</repository>
+	</repositories>
+	<scm>
+		<connection>scm:git:https://github.com/jenkinsci/testng-starter-plugin.git</connection>
+		<developerConnection>scm:git:https://github.com/jenkinsci/testng-starter-plugin.git</developerConnection>
+		<url>https://github.com/jenkinsci/testng-starter-plugin</url>
+		<tag>HEAD</tag>
+	</scm>
+	<developers>
+		<developer>
+			<id>sdrss</id>
+			<name>Socrates Sidereas</name>
+			<email>socrates.sidereas@gmail.com</email>
+		</developer>
+	</developers>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.jenkins-ci.org</id>
+			<url>https://repo.jenkins-ci.org/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<build>
+		<finalName>testng-starter-plugin</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>animal-sniffer-maven-plugin</artifactId>
+				<configuration>
+					<signature>
+						<groupId>org.codehaus.mojo.signature</groupId>
+						<artifactId>java18</artifactId>
+						<version>1.0</version>
+					</signature>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

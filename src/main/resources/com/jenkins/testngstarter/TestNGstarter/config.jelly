@@ -1,0 +1,137 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"> 
+ 	
+ 	<f:entry title="${%suiteXmlFiles}" field="suiteXmlFiles">
+ 		<f:textarea/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%listeners}" field="listeners">
+ 		<f:textarea/>
+ 	</f:entry>
+ 	
+  	<f:entry title="${%systemProperties}" field="systemProperties">
+ 		<f:textarea/>
+ 	</f:entry>
+ 	
+  <f:advanced>
+  
+  	<f:entry title="${%pomLocation}" field="pomLocation">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%preserveOrder}" field="preserveOrder">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%randomizeSuites}" field="randomizeSuites">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%isJUnit}" field="isJUnit">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%groups}" field="groups">
+ 		<f:textarea/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%excludedGroups}" field="excludedGroups">
+ 		<f:textarea/>
+ 	</f:entry>
+ 	
+ 	<f:entry name="goalType" title="${%configFailurePolicy}" field="configFailurePolicy">
+ 		<select name="configFailurePolicy">
+ 			<option value="NONE" selected="${instance.configFailurePolicy.equals('NONE')? 'true':null}">NONE</option>
+    		<option value="SKIP" selected="${instance.configFailurePolicy.equals('SKIP')? 'true':null}">SKIP</option>
+    		<option value="CONTINUE" selected="${instance.configFailurePolicy.equals('CONTINUE')? 'true':null}">CONTINUE</option>
+  		</select>
+  	</f:entry>
+  	
+  	<f:entry name="goalType" title="${%parallel}" field="parallel">
+ 		<select name="parallel">
+ 			<option value="NONE" selected="${instance.parallel.equals('NONE')? 'true':null}">NONE</option>
+    		<option value="CLASSES" selected="${instance.parallel.equals('CLASSES')? 'true':null}">CLASSES</option>
+    		<option value="INSTANCES" selected="${instance.parallel.equals('INSTANCES')? 'true':null}">INSTANCES</option>
+    		<option value="METHODS" selected="${instance.parallel.equals('METHODS')? 'true':null}">METHODS</option>
+    		<option value="TEST" selected="${instance.parallel.equals('TEST')? 'true':null}">CLASSES</option>
+  		</select>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%threadPoolSize}" field="threadPoolSize">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+  	<f:entry title="${%suiteThreadPoolSize}" field="suiteThreadPoolSize">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%dataProviderThreadCount}" field="dataProviderThreadCount">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%failFast}" field="failFast">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%executeTestngFailedxml}" field="executeTestngFailedxml">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%generateHtmlReport}" field="generateHtmlReport">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%generateJunitReport}" field="generateJunitReport">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%generateReportNGhtmlReport}" field="generateReportNGhtmlReport">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%generateXMLReport}" field="generateXMLReport">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%showPassedConfigurations}" field="showPassedConfigurations">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%outputDirectory}" field="outputDirectory">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%globalTestTimeOut}" field="globalTestTimeOut">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%handleKnownDefectsAsFailures}" field="handleKnownDefectsAsFailures">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+  	<f:entry title="${%failOnErrors}" field="failOnErrors">
+ 		<f:checkbox/>
+ 	</f:entry>
+ 	
+  	 <f:entry title="${%logOutputReport}" field="logOutputReport">
+ 		<f:checkbox/>
+ 	</f:entry>
+  	
+ 	<f:entry title="${%reportNGhtmlReportTitle}" field="reportNGhtmlReportTitle">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%reportNGOutputDirectory}" field="reportNGOutputDirectory">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
+ 	<f:entry title="${%maxTestRetryFailures}" field="maxTestRetryFailures">
+ 		<f:textbox/>
+ 	</f:entry>
+  	
+  	<f:entry title="${%suiteXmlFilesPostBuild}" field="suiteXmlFilesPostBuild">
+ 		<f:textarea/>
+ 	</f:entry>
+  </f:advanced>
+  
+</j:jelly>
