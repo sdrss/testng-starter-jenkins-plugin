@@ -3,6 +3,7 @@ package com.jenkins.testngstarter;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import com.google.common.base.Strings;
@@ -12,7 +13,6 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
-import hudson.model.FreeStyleProject;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
 import hudson.tasks.Maven;
@@ -302,12 +302,13 @@ public class TestNGstarter extends Builder {
 		return params.toString();
 	}
 	
+	@Symbol("testNGstarter")
 	@Extension
 	public static class Descriptor extends BuildStepDescriptor<Builder> {
 		
 		@Override
 		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-			return FreeStyleProject.class.isAssignableFrom(jobType);
+			return true;
 		}
 		
 		@Override
