@@ -20,15 +20,15 @@
  	</f:entry>
  	
  	<f:entry title="${%preserveOrder}" field="preserveOrder">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.preserveOrderDefault}" />
  	</f:entry>
  	
  	<f:entry title="${%randomizeSuites}" field="randomizeSuites">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.randomizeSuitesDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%isJUnit}" field="isJUnit">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.isJUnitDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%groups}" field="groups">
@@ -70,31 +70,31 @@
  	</f:entry>
  	
  	<f:entry title="${%failFast}" field="failFast">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.failFastDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%executeTestngFailedxml}" field="executeTestngFailedxml">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.executeTestngFailedxmlDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%generateHtmlReport}" field="generateHtmlReport">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.generateHtmlReportDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%generateJunitReport}" field="generateJunitReport">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.generateJunitReportDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%generateReportNGhtmlReport}" field="generateReportNGhtmlReport">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.generateReportNGhtmlReportDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%generateXMLReport}" field="generateXMLReport">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.generateXMLReportDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%showPassedConfigurations}" field="showPassedConfigurations">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.showPassedConfigurationsDefault}"/>
  	</f:entry>
  	
  	<f:entry title="${%outputDirectory}" field="outputDirectory">
@@ -106,11 +106,11 @@
  	</f:entry>
  	
  	<f:entry title="${%handleKnownDefectsAsFailures}" field="handleKnownDefectsAsFailures">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.handleKnownDefectsAsFailuresDefault}"/>
  	</f:entry>
  	
   	<f:entry title="${%failOnErrors}" field="failOnErrors">
- 		<f:checkbox/>
+ 		<f:checkbox default="${descriptor.failOnErrorsDefault}"/>
  	</f:entry>
  	
   	 <f:entry title="${%logOutputReport}" field="logOutputReport">

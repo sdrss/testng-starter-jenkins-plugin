@@ -128,6 +128,41 @@ public class TestNGstarter extends Builder {
 		return true;
 	}
 	
+	@Extension
+	public static class DescriptorImpl extends Descriptor {
+		public static final String pomLocationDefault = "";
+		public static final String configFailurePolicyDefault = "SKIP";
+		public static final String dataProviderThreadCountDefault = "0";
+		public static final String groupsDefault = "";
+		public static final String excludedGroupsDefault = "";
+		public static final String failFastDefault = "false";
+		public static final String failOnErrorsDefault = "false";
+		public static final String generateHtmlReportDefault = "false";
+		public static final String generateJunitReportDefault = "false";
+		public static final String generateReportNGhtmlReportDefault = "true";
+		public static final String generateXMLReportDefault = "true";
+		public static final String globalTestTimeOutDefault = "0";
+		public static final String handleKnownDefectsAsFailuresDefault = "false";
+		public static final String isJUnitDefault = "false";
+		public static final String listenersDefault = "";
+		public static final String logOutputReportDefault = "false";
+		public static final String outputDirectoryDefault = "testNG";
+		public static final String parallelDefault = "NONE";
+		public static final String preserveOrderDefault = "true";
+		public static final String randomizeSuitesDefault = "false";
+		public static final String reportNGhtmlReportTitleDefault = "ReportNG Title Report";
+		public static final String reportNGOutputDirectoryDefault = "html";
+		public static final String maxTestRetryFailuresDefault = "0";
+		public static final String executeTestngFailedxmlDefault = "false";
+		public static final String showPassedConfigurationsDefault = "true";
+		public static final String threadPoolSizeDefault = "1";
+		public static final String suiteThreadPoolSizeDefault = "1";
+		public static final String suiteXmlFilesDefault = "";
+		public static final String suiteXmlFilesPostBuildDefault = "";
+		public static final String systemPropertiesDefault = "";
+		
+	}
+	
 	private String generateMvnParams() {
 		StringBuffer params = new StringBuffer();
 		if (getPomLocation() != null) {
