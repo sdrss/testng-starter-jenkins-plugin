@@ -20,7 +20,7 @@ import hudson.tasks.Maven;
 public class TestNGstarter extends Builder {
 	
 	public static final String DISPLAY_NAME = "TestNG Starter";
-	public static final String MVN_START = "clean package -DskipTests -B && install testng-starter:test";
+	public static final String MVN_START_TESTNG_STARTER = "install testng-starter:test";
 	private String pomLocation;
 	private String configFailurePolicy;
 	private String dataProviderThreadCount;
@@ -120,7 +120,7 @@ public class TestNGstarter extends Builder {
 		PrintStream logger = listener.getLogger();
 		logger.println("Start TestNG starter plugin");
 		String params = generateMvnParams();
-		String command = MVN_START + params;
+		String command = MVN_START_TESTNG_STARTER + params;
 		logger.println(command);
 		Maven mvn = new Maven(command, "");
 		mvn.perform(build, launcher, listener);
@@ -128,8 +128,23 @@ public class TestNGstarter extends Builder {
 		return true;
 	}
 	
+	@Symbol("testNGstarter")
 	@Extension
-	public static class DescriptorImpl extends Descriptor {
+	public static class Descriptor extends BuildStepDescriptor<Builder> {
+		
+		@Override
+		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+			return true;
+		}
+		
+		@Override
+		public String getDisplayName() {
+			return DISPLAY_NAME;
+		}
+	}
+	
+	@Extension
+	public static class DescriptorImpl {
 		public static final String pomLocationDefault = "";
 		public static final String configFailurePolicyDefault = "SKIP";
 		public static final String dataProviderThreadCountDefault = "0";
@@ -164,7 +179,7 @@ public class TestNGstarter extends Builder {
 	}
 	
 	private String generateMvnParams() {
-		StringBuffer params = new StringBuffer();
+		StringBuilder params = new StringBuilder();
 		if (getPomLocation() != null) {
 			params.append(" -f " + getPomLocation());
 		}
@@ -185,31 +200,43 @@ public class TestNGstarter extends Builder {
 		if (getFailFast() != null) {
 			if (getFailFast().equalsIgnoreCase("true")) {
 				params.append(" -DfailFast=true");
+			} else {
+				params.append(" -DfailFast=false");
 			}
 		}
 		if (getFailOnErrors() != null) {
 			if (getFailOnErrors().equalsIgnoreCase("true")) {
 				params.append(" -DfailOnErrors=true");
+			} else {
+				params.append(" -DfailOnErrors=false");
 			}
 		}
 		if (getGenerateHtmlReport() != null) {
 			if (getGenerateHtmlReport().equalsIgnoreCase("true")) {
+				params.append(" -DgenerateHtmlReport=true");
+			} else {
 				params.append(" -DgenerateHtmlReport=true");
 			}
 		}
 		if (getGenerateJunitReport() != null) {
 			if (getGenerateJunitReport().equalsIgnoreCase("true")) {
 				params.append(" -DgenerateJunitReport=true");
+			} else {
+				params.append(" -DgenerateJunitReport=false");
 			}
 		}
 		if (getGenerateReportNGhtmlReport() != null) {
 			if (getGenerateReportNGhtmlReport().equalsIgnoreCase("true")) {
 				params.append(" -DgenerateReportNGhtmlReport=true");
+			} else {
+				params.append(" -DgenerateReportNGhtmlReport=false");
 			}
 		}
 		if (getGenerateXMLReport() != null) {
 			if (getGenerateXMLReport().equalsIgnoreCase("true")) {
 				params.append(" -DgenerateXMLReport=true");
+			} else {
+				params.append(" -DgenerateXMLReport=false");
 			}
 		}
 		if (getGlobalTestTimeOut() != null) {
@@ -219,17 +246,21 @@ public class TestNGstarter extends Builder {
 					params.append(" -DglobalTestTimeOut=" + getGlobalTestTimeOut());
 				}
 			} catch (Exception ex) {
-				
+				params.append(" -DglobalTestTimeOut=0");
 			}
 		}
 		if (getHandleKnownDefectsAsFailures() != null) {
 			if (getHandleKnownDefectsAsFailures().equalsIgnoreCase("true")) {
 				params.append(" -DhandleKnownDefectsAsFailures=true");
+			} else {
+				params.append(" -DhandleKnownDefectsAsFailures=false");
 			}
 		}
 		if (getIsJUnit() != null) {
 			if (getIsJUnit().equalsIgnoreCase("true")) {
 				params.append(" -DisJUnit=true");
+			} else {
+				params.append(" -DisJUnit=false");
 			}
 		}
 		if (getListeners() != null) {
@@ -238,10 +269,14 @@ public class TestNGstarter extends Builder {
 		if (getLogOutputReport() != null) {
 			if (getLogOutputReport().equalsIgnoreCase("true")) {
 				params.append(" -DlogOutputReport=true");
+			} else {
+				params.append(" -DlogOutputReport=false");
 			}
 		}
 		if (getOutputDirectory() != null) {
 			params.append(" -DoutputDirectory=" + getOutputDirectory());
+		} else {
+			params.append(" -DoutputDirectory=test-output");
 		}
 		if (getParallel() != null) {
 			if (!getParallel().equalsIgnoreCase("NONE")) {
@@ -251,11 +286,15 @@ public class TestNGstarter extends Builder {
 		if (getPreserveOrder() != null) {
 			if (getPreserveOrder().equalsIgnoreCase("false")) {
 				params.append(" -DpreserveOrder=false");
+			} else {
+				params.append(" -DpreserveOrder=true");
 			}
 		}
 		if (getRandomizeSuites() != null) {
 			if (getRandomizeSuites().equalsIgnoreCase("true")) {
 				params.append(" -DrandomizeSuites=true");
+			} else {
+				params.append(" -DrandomizeSuites=false");
 			}
 		}
 		if (getReportNGhtmlReportTitle() != null) {
@@ -263,6 +302,8 @@ public class TestNGstarter extends Builder {
 		}
 		if (getReportNGOutputDirectory() != null) {
 			params.append(" -DreportNGOutputDirectory=" + getReportNGOutputDirectory());
+		} else {
+			params.append(" -DreportNGOutputDirectory=reportNG");
 		}
 		if (getMaxTestRetryFailures() != null) {
 			try {
@@ -271,17 +312,21 @@ public class TestNGstarter extends Builder {
 					params.append(" -DmaxTestRetryFailures=" + getMaxTestRetryFailures());
 				}
 			} catch (Exception ex) {
-				
+				params.append(" -DmaxTestRetryFailures=0");
 			}
 		}
 		if (getExecuteTestngFailedxml() != null) {
 			if (getExecuteTestngFailedxml().equalsIgnoreCase("true")) {
 				params.append(" -DexecuteTestngFailedxml=true");
+			} else {
+				params.append(" -DexecuteTestngFailedxml=false");
 			}
 		}
 		if (getShowPassedConfigurations() != null) {
 			if (getShowPassedConfigurations().equalsIgnoreCase("false")) {
 				params.append(" -DshowPassedConfigurations=true");
+			} else {
+				params.append(" -DshowPassedConfigurations=false");
 			}
 		}
 		if (getThreadPoolSize() != null) {
@@ -300,21 +345,6 @@ public class TestNGstarter extends Builder {
 			params.append(" -DsystemProperties=" + getSystemProperties());
 		}
 		return params.toString();
-	}
-	
-	@Symbol("testNGstarter")
-	@Extension
-	public static class Descriptor extends BuildStepDescriptor<Builder> {
-		
-		@Override
-		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
-			return true;
-		}
-		
-		@Override
-		public String getDisplayName() {
-			return DISPLAY_NAME;
-		}
 	}
 	
 	private String handleParam(String param) {
