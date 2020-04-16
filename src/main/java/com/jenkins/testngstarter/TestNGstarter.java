@@ -20,7 +20,7 @@ import hudson.tasks.Maven;
 public class TestNGstarter extends Builder {
 	
 	public static final String DISPLAY_NAME = "TestNG Starter";
-	public static final String MVN_START_TESTNG_STARTER = "install testng-starter:test";
+	public static final String MVN_START_TESTNG_STARTER = "install testng-starter:test -B";
 	private String pomLocation;
 	private String configFailurePolicy;
 	private String dataProviderThreadCount;
