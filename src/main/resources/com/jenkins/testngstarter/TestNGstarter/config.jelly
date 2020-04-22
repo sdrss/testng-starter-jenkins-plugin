@@ -20,15 +20,15 @@
  	</f:entry>
  	
  	<f:entry title="${%preserveOrder}" field="preserveOrder">
- 		<f:checkbox default="${descriptor.preserveOrderDefault}" />
+ 		<f:checkbox default="true" />
  	</f:entry>
  	
  	<f:entry title="${%randomizeSuites}" field="randomizeSuites">
- 		<f:checkbox default="${descriptor.randomizeSuitesDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%isJUnit}" field="isJUnit">
- 		<f:checkbox default="${descriptor.isJUnitDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%groups}" field="groups">
@@ -70,31 +70,31 @@
  	</f:entry>
  	
  	<f:entry title="${%failFast}" field="failFast">
- 		<f:checkbox default="${descriptor.failFastDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%executeTestngFailedxml}" field="executeTestngFailedxml">
- 		<f:checkbox default="${descriptor.executeTestngFailedxmlDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%generateHtmlReport}" field="generateHtmlReport">
- 		<f:checkbox default="${descriptor.generateHtmlReportDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%generateJunitReport}" field="generateJunitReport">
- 		<f:checkbox default="${descriptor.generateJunitReportDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%generateReportNGhtmlReport}" field="generateReportNGhtmlReport">
- 		<f:checkbox default="${descriptor.generateReportNGhtmlReportDefault}"/>
+ 		<f:checkbox default="true"/>
  	</f:entry>
  	
  	<f:entry title="${%generateXMLReport}" field="generateXMLReport">
- 		<f:checkbox default="${descriptor.generateXMLReportDefault}"/>
+ 		<f:checkbox default="true"/>
  	</f:entry>
  	
  	<f:entry title="${%showPassedConfigurations}" field="showPassedConfigurations">
- 		<f:checkbox default="${descriptor.showPassedConfigurationsDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
  	<f:entry title="${%outputDirectory}" field="outputDirectory">
@@ -106,11 +106,11 @@
  	</f:entry>
  	
  	<f:entry title="${%handleKnownDefectsAsFailures}" field="handleKnownDefectsAsFailures">
- 		<f:checkbox default="${descriptor.handleKnownDefectsAsFailuresDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
   	<f:entry title="${%failOnErrors}" field="failOnErrors">
- 		<f:checkbox default="${descriptor.failOnErrorsDefault}"/>
+ 		<f:checkbox default="false"/>
  	</f:entry>
  	
   	 <f:entry title="${%logOutputReport}" field="logOutputReport">
@@ -129,9 +129,6 @@
  		<f:textbox/>
  	</f:entry>
   	
-  	<f:entry title="${%suiteXmlFilesPostBuild}" field="suiteXmlFilesPostBuild">
- 		<f:textarea/>
- 	</f:entry>
   </f:advanced>
   
 </j:jelly>

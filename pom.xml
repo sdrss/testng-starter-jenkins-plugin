@@ -10,12 +10,12 @@
 	</parent>
 	<artifactId>testng-starter</artifactId>
 	<packaging>hpi</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>TestNG Starter Plugin</name>
 	<description>Start TestNG</description>
 	<url>https://github.com/jenkinsci/testng-starter-plugin</url>
 	<properties>
-		<jenkins.version>2.0</jenkins.version>
+		<jenkins.version>2.7</jenkins.version>
 	</properties>
 	<licenses>
 		<license>

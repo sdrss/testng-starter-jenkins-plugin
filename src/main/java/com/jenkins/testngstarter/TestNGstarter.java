@@ -49,7 +49,6 @@ public class TestNGstarter extends Builder {
 	private String threadPoolSize;
 	private String suiteThreadPoolSize;
 	private String suiteXmlFiles;
-	private String suiteXmlFilesPostBuild;
 	private String systemProperties;
 	
 	@DataBoundConstructor
@@ -81,7 +80,6 @@ public class TestNGstarter extends Builder {
 			String threadPoolSize,
 			String suiteThreadPoolSize,
 			String suiteXmlFiles,
-			String suiteXmlFilesPostBuild,
 			String systemProperties) {
 		this.setPomLocation(handleParam(pomLocation));
 		this.setConfigFailurePolicy(handleParam(configFailurePolicy));
@@ -111,7 +109,6 @@ public class TestNGstarter extends Builder {
 		this.setThreadPoolSize(handleParam(threadPoolSize));
 		this.setSuiteThreadPoolSize(handleParam(suiteThreadPoolSize));
 		this.setSuiteXmlFiles(handleParam(suiteXmlFiles));
-		this.setSuiteXmlFilesPostBuild(handleParam(suiteXmlFilesPostBuild));
 		this.setSystemProperties(handleParam(systemProperties));
 	}
 	
@@ -143,50 +140,13 @@ public class TestNGstarter extends Builder {
 		}
 	}
 	
-	@Extension
-	public static class DescriptorImpl {
-		public static final String pomLocationDefault = "";
-		public static final String configFailurePolicyDefault = "SKIP";
-		public static final String dataProviderThreadCountDefault = "0";
-		public static final String groupsDefault = "";
-		public static final String excludedGroupsDefault = "";
-		public static final String failFastDefault = "false";
-		public static final String failOnErrorsDefault = "false";
-		public static final String generateHtmlReportDefault = "false";
-		public static final String generateJunitReportDefault = "false";
-		public static final String generateReportNGhtmlReportDefault = "true";
-		public static final String generateXMLReportDefault = "true";
-		public static final String globalTestTimeOutDefault = "0";
-		public static final String handleKnownDefectsAsFailuresDefault = "false";
-		public static final String isJUnitDefault = "false";
-		public static final String listenersDefault = "";
-		public static final String logOutputReportDefault = "false";
-		public static final String outputDirectoryDefault = "testNG";
-		public static final String parallelDefault = "NONE";
-		public static final String preserveOrderDefault = "true";
-		public static final String randomizeSuitesDefault = "false";
-		public static final String reportNGhtmlReportTitleDefault = "ReportNG Title Report";
-		public static final String reportNGOutputDirectoryDefault = "html";
-		public static final String maxTestRetryFailuresDefault = "0";
-		public static final String executeTestngFailedxmlDefault = "false";
-		public static final String showPassedConfigurationsDefault = "true";
-		public static final String threadPoolSizeDefault = "1";
-		public static final String suiteThreadPoolSizeDefault = "1";
-		public static final String suiteXmlFilesDefault = "";
-		public static final String suiteXmlFilesPostBuildDefault = "";
-		public static final String systemPropertiesDefault = "";
-		
-	}
-	
 	private String generateMvnParams() {
 		StringBuilder params = new StringBuilder();
 		if (getPomLocation() != null) {
-			params.append(" -f " + getPomLocation());
+			params.append(" -f " + getPomLocation() + "");
 		}
-		if (getConfigFailurePolicy() != null) {
-			if (!getConfigFailurePolicy().equalsIgnoreCase("NONE")) {
-				params.append(" -DconfigFailurePolicy=" + getConfigFailurePolicy());
-			}
+		if (getConfigFailurePolicy() != null && !getConfigFailurePolicy().equalsIgnoreCase("NONE")) {
+			params.append(" -DconfigFailurePolicy=" + getConfigFailurePolicy());
 		}
 		if (getDataProviderThreadCount() != null) {
 			params.append(" -DdataProviderThreadCount=" + getDataProviderThreadCount());
@@ -197,47 +157,23 @@ public class TestNGstarter extends Builder {
 		if (getExcludedGroups() != null) {
 			params.append(" -DexcludedGroups=" + getExcludedGroups());
 		}
-		if (getFailFast() != null) {
-			if (getFailFast().equalsIgnoreCase("true")) {
-				params.append(" -DfailFast=true");
-			} else {
-				params.append(" -DfailFast=false");
-			}
+		if (getFailFast() != null && getFailFast().equalsIgnoreCase("true")) {
+			params.append(" -DfailFast=true");
 		}
-		if (getFailOnErrors() != null) {
-			if (getFailOnErrors().equalsIgnoreCase("true")) {
-				params.append(" -DfailOnErrors=true");
-			} else {
-				params.append(" -DfailOnErrors=false");
-			}
+		if (getFailOnErrors() != null && getFailOnErrors().equalsIgnoreCase("true")) {
+			params.append(" -DfailOnErrors=true");
 		}
-		if (getGenerateHtmlReport() != null) {
-			if (getGenerateHtmlReport().equalsIgnoreCase("true")) {
-				params.append(" -DgenerateHtmlReport=true");
-			} else {
-				params.append(" -DgenerateHtmlReport=true");
-			}
+		if (getGenerateHtmlReport() != null && getGenerateHtmlReport().equalsIgnoreCase("true")) {
+			params.append(" -DgenerateHtmlReport=true");
 		}
-		if (getGenerateJunitReport() != null) {
-			if (getGenerateJunitReport().equalsIgnoreCase("true")) {
-				params.append(" -DgenerateJunitReport=true");
-			} else {
-				params.append(" -DgenerateJunitReport=false");
-			}
+		if (getGenerateJunitReport() != null && getGenerateJunitReport().equalsIgnoreCase("true")) {
+			params.append(" -DgenerateJunitReport=true");
 		}
-		if (getGenerateReportNGhtmlReport() != null) {
-			if (getGenerateReportNGhtmlReport().equalsIgnoreCase("true")) {
-				params.append(" -DgenerateReportNGhtmlReport=true");
-			} else {
-				params.append(" -DgenerateReportNGhtmlReport=false");
-			}
+		if (getGenerateReportNGhtmlReport() != null && getGenerateReportNGhtmlReport().equalsIgnoreCase("true")) {
+			params.append(" -DgenerateReportNGhtmlReport=true");
 		}
-		if (getGenerateXMLReport() != null) {
-			if (getGenerateXMLReport().equalsIgnoreCase("true")) {
-				params.append(" -DgenerateXMLReport=true");
-			} else {
-				params.append(" -DgenerateXMLReport=false");
-			}
+		if (getGenerateXMLReport() != null && getGenerateXMLReport().equalsIgnoreCase("true")) {
+			params.append(" -DgenerateXMLReport=true");
 		}
 		if (getGlobalTestTimeOut() != null) {
 			try {
@@ -246,64 +182,37 @@ public class TestNGstarter extends Builder {
 					params.append(" -DglobalTestTimeOut=" + getGlobalTestTimeOut());
 				}
 			} catch (Exception ex) {
-				params.append(" -DglobalTestTimeOut=0");
 			}
 		}
-		if (getHandleKnownDefectsAsFailures() != null) {
-			if (getHandleKnownDefectsAsFailures().equalsIgnoreCase("true")) {
-				params.append(" -DhandleKnownDefectsAsFailures=true");
-			} else {
-				params.append(" -DhandleKnownDefectsAsFailures=false");
-			}
+		if (getHandleKnownDefectsAsFailures() != null && getHandleKnownDefectsAsFailures().equalsIgnoreCase("true")) {
+			params.append(" -DhandleKnownDefectsAsFailures=true");
 		}
-		if (getIsJUnit() != null) {
-			if (getIsJUnit().equalsIgnoreCase("true")) {
-				params.append(" -DisJUnit=true");
-			} else {
-				params.append(" -DisJUnit=false");
-			}
+		if (getIsJUnit() != null && getIsJUnit().equalsIgnoreCase("true")) {
+			params.append(" -DisJUnit=true");
 		}
 		if (getListeners() != null) {
 			params.append(" -Dlisteners=" + getListeners());
 		}
-		if (getLogOutputReport() != null) {
-			if (getLogOutputReport().equalsIgnoreCase("true")) {
-				params.append(" -DlogOutputReport=true");
-			} else {
-				params.append(" -DlogOutputReport=false");
-			}
+		if (getLogOutputReport() != null && getLogOutputReport().equalsIgnoreCase("true")) {
+			params.append(" -DlogOutputReport=true");
 		}
 		if (getOutputDirectory() != null) {
 			params.append(" -DoutputDirectory=" + getOutputDirectory());
-		} else {
-			params.append(" -DoutputDirectory=test-output");
 		}
-		if (getParallel() != null) {
-			if (!getParallel().equalsIgnoreCase("NONE")) {
-				params.append(" -Dparallel=" + getParallel());
-			}
+		if (getParallel() != null && !getParallel().equalsIgnoreCase("NONE")) {
+			params.append(" -Dparallel=" + getParallel());
 		}
-		if (getPreserveOrder() != null) {
-			if (getPreserveOrder().equalsIgnoreCase("false")) {
-				params.append(" -DpreserveOrder=false");
-			} else {
-				params.append(" -DpreserveOrder=true");
-			}
+		if (getPreserveOrder() != null && getPreserveOrder().equalsIgnoreCase("false")) {
+			params.append(" -DpreserveOrder=false");
 		}
-		if (getRandomizeSuites() != null) {
-			if (getRandomizeSuites().equalsIgnoreCase("true")) {
-				params.append(" -DrandomizeSuites=true");
-			} else {
-				params.append(" -DrandomizeSuites=false");
-			}
+		if (getRandomizeSuites() != null && getRandomizeSuites().equalsIgnoreCase("true")) {
+			params.append(" -DrandomizeSuites=true");
 		}
 		if (getReportNGhtmlReportTitle() != null) {
 			params.append(" -DreportNGhtmlReportTitle=" + getReportNGhtmlReportTitle());
 		}
 		if (getReportNGOutputDirectory() != null) {
 			params.append(" -DreportNGOutputDirectory=" + getReportNGOutputDirectory());
-		} else {
-			params.append(" -DreportNGOutputDirectory=reportNG");
 		}
 		if (getMaxTestRetryFailures() != null) {
 			try {
@@ -315,19 +224,11 @@ public class TestNGstarter extends Builder {
 				params.append(" -DmaxTestRetryFailures=0");
 			}
 		}
-		if (getExecuteTestngFailedxml() != null) {
-			if (getExecuteTestngFailedxml().equalsIgnoreCase("true")) {
-				params.append(" -DexecuteTestngFailedxml=true");
-			} else {
-				params.append(" -DexecuteTestngFailedxml=false");
-			}
+		if (getExecuteTestngFailedxml() != null && getExecuteTestngFailedxml().equalsIgnoreCase("true")) {
+			params.append(" -DexecuteTestngFailedxml=true");
 		}
-		if (getShowPassedConfigurations() != null) {
-			if (getShowPassedConfigurations().equalsIgnoreCase("false")) {
-				params.append(" -DshowPassedConfigurations=true");
-			} else {
-				params.append(" -DshowPassedConfigurations=false");
-			}
+		if (getShowPassedConfigurations() != null && getShowPassedConfigurations().equalsIgnoreCase("false")) {
+			params.append(" -DshowPassedConfigurations=true");
 		}
 		if (getThreadPoolSize() != null) {
 			params.append(" -DthreadPoolSize=" + getThreadPoolSize());
@@ -337,9 +238,6 @@ public class TestNGstarter extends Builder {
 		}
 		if (getSuiteXmlFiles() != null) {
 			params.append(" -DsuiteXmlFiles=" + getSuiteXmlFiles());
-		}
-		if (getSuiteXmlFilesPostBuild() != null) {
-			params.append(" -DsuiteXmlFilesPostBuild=" + getSuiteXmlFilesPostBuild());
 		}
 		if (getSystemProperties() != null) {
 			params.append(" -DsystemProperties=" + getSystemProperties());
@@ -552,14 +450,6 @@ public class TestNGstarter extends Builder {
 	
 	public void setSuiteXmlFiles(String suiteXmlFiles) {
 		this.suiteXmlFiles = suiteXmlFiles;
-	}
-	
-	public String getSuiteXmlFilesPostBuild() {
-		return suiteXmlFilesPostBuild;
-	}
-	
-	public void setSuiteXmlFilesPostBuild(String suiteXmlFilesPostBuild) {
-		this.suiteXmlFilesPostBuild = suiteXmlFilesPostBuild;
 	}
 	
 	public String getSystemProperties() {
