@@ -5,13 +5,13 @@
 == Description
 
 It's a jenkins plugin to start testNG suites with all testNG/reportNG configuration attributes.
-Uses https://github.com/sdrss/maven-testng-starter-plugin[maven testng starter plugin] .
+Uses https://github.com/sdrss/testng-starter-maven-plugin[testng starter maven plugin] .
 
 image:https://github.com/sdrss/maven-testng-starter-plugin/workflows/Java_CI/badge.svg[Build,link= https://github.com/sdrss/maven-testng-starter-plugin/workflows/Java_CI]
 
 == Release Notes
 
-See the https://github.com/jenkinsci/test-results-aggregator-plugin/releases[Github releases page].
+See the https://github.com/sdrss/testng-starter-jenkins-plugin/releases[Github releases page].
 
 === 0.0.1 (12 Dec 2019)
  * Initial Release
