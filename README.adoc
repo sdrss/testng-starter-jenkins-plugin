@@ -5,7 +5,7 @@
 == Description
 
 It's a jenkins plugin to start testNG suites with all testNG/reportNG configuration attributes.
-Uses https://github.com/sdrss/maven-testng-starter-plugin[maven testng starter plugin] .
+Uses https://github.com/sdrss/testng-starter-maven-plugin[testng starter maven plugin] .
 
 image:https://github.com/sdrss/maven-testng-starter-plugin/workflows/Java_CI/badge.svg[Build,link= https://github.com/sdrss/maven-testng-starter-plugin/workflows/Java_CI]
 
