@@ -187,13 +187,13 @@ public class TestNGstarter extends Builder {
 				boolean foundError = false;
 				String[] elements = value.split(",");
 				for (String temp : elements) {
-					String[] keyValue = temp.split("=");
+					String[] keyValue = temp.split(":");
 					if (keyValue.length != 2) {
 						foundError = true;
 					}
 				}
 				if (foundError) {
-					return FormValidation.error("No key value pair. Usage key=value,otherkey=othervalue");
+					return FormValidation.error("No key value pair. Usage key:value");
 				}
 			}
 			return FormValidation.ok();
