@@ -3,8 +3,11 @@ package com.jenkins.testngstarter;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import javax.servlet.ServletException;
+
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 
 import com.google.common.base.Strings;
 
@@ -16,6 +19,7 @@ import hudson.model.BuildListener;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
 import hudson.tasks.Maven;
+import hudson.util.FormValidation;
 
 public class TestNGstarter extends Builder {
 	
@@ -137,6 +141,62 @@ public class TestNGstarter extends Builder {
 		@Override
 		public String getDisplayName() {
 			return DISPLAY_NAME;
+		}
+		
+		// Form validation
+		public FormValidation doCheckThreadPoolSize(@QueryParameter String value) throws IOException, ServletException {
+			return doCheck(value);
+		}
+		
+		public FormValidation doCheckSuiteThreadPoolSize(@QueryParameter String value) throws IOException, ServletException {
+			return doCheck(value);
+		}
+		
+		public FormValidation doCheckDataProviderThreadCount(@QueryParameter String value) throws IOException, ServletException {
+			return doCheck(value);
+		}
+		
+		public FormValidation doCheckGlobalTestTimeOut(@QueryParameter String value) throws IOException, ServletException {
+			return doCheck(value);
+		}
+		
+		public FormValidation doCheckMaxTestRetryFailures(@QueryParameter String value) throws IOException, ServletException {
+			return doCheck(value);
+		}
+		
+		// General validation for int > 0
+		private FormValidation doCheck(@QueryParameter String value) throws IOException, ServletException {
+			if (!Strings.isNullOrEmpty(value)) {
+				try {
+					int number = Integer.parseInt(value);
+					if (number >= 0) {
+						return FormValidation.ok();
+					} else {
+						return FormValidation.error("Number should be greater or equal to 0");
+					}
+				} catch (NumberFormatException e) {
+					return FormValidation.error("Not a number");
+				}
+			}
+			return FormValidation.ok();
+		}
+		
+		// System properties form validation
+		public FormValidation doCheckSystemProperties(@QueryParameter String value) throws IOException, ServletException {
+			if (!Strings.isNullOrEmpty(value)) {
+				boolean foundError = false;
+				String[] elements = value.split(",");
+				for (String temp : elements) {
+					String[] keyValue = temp.split("=");
+					if (keyValue.length != 2) {
+						foundError = true;
+					}
+				}
+				if (foundError) {
+					return FormValidation.error("No key value pair. Usage key=value,otherkey=othervalue");
+				}
+			}
+			return FormValidation.ok();
 		}
 	}
 	
