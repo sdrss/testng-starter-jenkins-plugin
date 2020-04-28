@@ -19,6 +19,10 @@
  		<f:textbox/>
  	</f:entry>
  	
+ 	<f:entry title="${%mvnParams}" field="mvnParams">
+ 		<f:textbox/>
+ 	</f:entry>
+ 	
  	<f:entry title="${%preserveOrder}" field="preserveOrder">
  		<f:checkbox default="true" />
  	</f:entry>

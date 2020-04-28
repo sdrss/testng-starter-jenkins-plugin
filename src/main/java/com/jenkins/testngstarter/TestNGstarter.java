@@ -54,6 +54,7 @@ public class TestNGstarter extends Builder {
 	private String suiteThreadPoolSize;
 	private String suiteXmlFiles;
 	private String systemProperties;
+	private String mvnParams;
 	
 	@DataBoundConstructor
 	public TestNGstarter(String pomLocation,
@@ -84,7 +85,8 @@ public class TestNGstarter extends Builder {
 			String threadPoolSize,
 			String suiteThreadPoolSize,
 			String suiteXmlFiles,
-			String systemProperties) {
+			String systemProperties,
+			String mvnParams) {
 		this.setPomLocation(handleParam(pomLocation));
 		this.setConfigFailurePolicy(handleParam(configFailurePolicy));
 		this.setDataProviderThreadCount(handleParam(dataProviderThreadCount));
@@ -114,6 +116,7 @@ public class TestNGstarter extends Builder {
 		this.setSuiteThreadPoolSize(handleParam(suiteThreadPoolSize));
 		this.setSuiteXmlFiles(handleParam(suiteXmlFiles));
 		this.setSystemProperties(handleParam(systemProperties));
+		this.setMvnParams(handleParam(mvnParams));
 	}
 	
 	@Override
@@ -301,6 +304,9 @@ public class TestNGstarter extends Builder {
 		}
 		if (getSystemProperties() != null) {
 			params.append(" -DsystemProperties=" + getSystemProperties());
+		}
+		if (getMvnParams() != null) {
+			params.append(" " + getMvnParams());
 		}
 		return params.toString();
 	}
@@ -542,5 +548,13 @@ public class TestNGstarter extends Builder {
 	
 	public void setDataProviderThreadCount(String dataProviderThreadCount) {
 		this.dataProviderThreadCount = dataProviderThreadCount;
+	}
+	
+	public String getMvnParams() {
+		return mvnParams;
+	}
+	
+	public void setMvnParams(String mvnParams) {
+		this.mvnParams = mvnParams;
 	}
 }
